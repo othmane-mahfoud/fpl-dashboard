@@ -43,7 +43,7 @@ def prepare_player_performance_by_gw(players_gw_path: str, players_path: str) ->
 
     return merged_df
 
-def prepare_player_cost_vs_performance(players_path: str) -> pd.DataFrame:
+def prepare_player_cost_vs_performance(players_path: str, teams_path: str) -> pd.DataFrame:
     """
     Prepare data for Player Cost vs. Performance visualization.
 
@@ -53,10 +53,28 @@ def prepare_player_cost_vs_performance(players_path: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Processed DataFrame ready for visualization.
     """
-    df = pd.read_csv(players_path)
-    df = df[['web_name', 'now_cost', 'total_points']]
+    players_df = pd.read_csv(players_path)
+    players_df = players_df[['web_name', 'element_type', 'team_code', 'now_cost', 'total_points', 'points_per_game']]
+    
+    teams_df = pd.read_csv(teams_path)
+    teams_df = teams_df[['code', 'name']]
+    
+    # Merge players and teams
+    merged_df = players_df.merge(teams_df, how='left', left_on='team_code', right_on='code')
 
-    return df
+    # Reorder and clean up columns
+    merged_df.rename(
+        columns={
+            'name': 'team_name',
+            'element_type': 'position'
+        }, inplace=True
+    )
+    
+    # Map player positions
+    position_mapping = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
+    merged_df["position"] = merged_df["position"].map(position_mapping)
+
+    return merged_df
 
 def prepare_ict_index_breakdown(players_path: str) -> pd.DataFrame:
     """
@@ -87,15 +105,32 @@ def prepare_fixtures_difficulty_ratings(fixtures_path: str, teams_path: str) -> 
     fixtures_df = pd.read_csv(fixtures_path)
     teams_df = pd.read_csv(teams_path)
 
-    # Merge home and away teams
-    fixtures_df = fixtures_df.merge(teams_df[['id', 'name', 'short_name', 'strength']], how='left', left_on='team_h', right_on='id')
-    fixtures_df = fixtures_df.merge(teams_df[['id', 'name', 'short_name', 'strength']], how='left', left_on='team_a', right_on='id')
-
-    # Select and rename columns 
-    fixtures_df = fixtures_df[['event', 'team_h', 'team_a', 'name_x', 'name_y', 'short_name_x', 'short_name_y', 'team_h_score', 'team_a_score', 'strength_x', 'strength_y']]
-    fixtures_df.columns = ['gameweek', 'home_team_id', 'away_team_id', 'home_team_name', 'away_team_name', 'home_team_short_name', 'away_team_short_name', 'home_team_score', 'away_team_score', 'home_team_strength', 'away_team_strength']
-
-    return fixtures_df
+    # return fixtures_df
+    fixtures_df = pd.merge(fixtures_df, teams_df[['id', 'name', 'short_name']].add_prefix('team_h_'), left_on='team_h', right_on='team_h_id', how='left')
+    fixtures_df = pd.merge(fixtures_df, teams_df[['id', 'name', 'short_name']].add_prefix('team_a_'), left_on='team_a', right_on='team_a_id', how='left')
+    fixtures_1 = fixtures_df[['event', 'team_h_name', 'team_h_short_name', 'team_h_difficulty', 'team_a_name', 'team_a_short_name', 'team_a_difficulty']]
+    fixtures_1 = fixtures_1.rename(columns={
+        'event': 'event',
+        'team_h_name': 'first_team_name',
+        'team_h_short_name': 'first_team_short_name',
+        'team_h_difficulty': 'first_team_difficulty',
+        'team_a_name': 'second_team_name',
+        'team_a_short_name': 'second_team_short_name',
+        'team_a_difficulty': 'second_team_difficulty',
+    })
+    fixtures_2 = fixtures_df[['event', 'team_a_name', 'team_a_short_name', 'team_a_difficulty', 'team_h_name', 'team_h_short_name', 'team_h_difficulty']]
+    fixtures_2 = fixtures_2.rename(columns={
+        'event': 'event',
+        'team_a_name': 'first_team_name',
+        'team_a_short_name': 'first_team_short_name',
+        'team_a_difficulty': 'first_team_difficulty',
+        'team_h_name': 'second_team_name',
+        'team_h_short_name': 'second_team_short_name',
+        'team_h_difficulty': 'second_team_difficulty',
+    })
+    fixtures_clean_df = pd.concat([fixtures_1, fixtures_2], ignore_index=True)
+    fixtures_clean_df = fixtures_clean_df.sort_values(by='event')
+    return fixtures_clean_df
 
 if __name__ == "__main__":
     # Prepare data for visualizations

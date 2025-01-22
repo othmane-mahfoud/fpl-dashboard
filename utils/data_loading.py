@@ -97,7 +97,7 @@ def extract_fixture_details(json_data: List[Dict]) -> pd.DataFrame:
     """Extract fixture details."""
     df = pd.DataFrame(json_data)
     selected_columns = [
-        "code", "event", "finished", "kickoff_time", "team_a", "team_a_score", "team_h", "team_h_score"
+        "code", "event", "finished", "kickoff_time", "team_a", "team_a_score", "team_h", "team_h_score", "team_h_difficulty", "team_a_difficulty"
     ]
     df = df[selected_columns]
     return df
