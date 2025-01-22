@@ -26,6 +26,23 @@ def fetch_fixtures_data():
     response.raise_for_status()  # Raise an exception for HTTP errors
     return response.json()
 
+def fetch_player_gw_data(player_id):
+    """
+    Fetch player gameweek data from the Fantasy Premier League API.
+
+    Args:
+        player_id (int): Player ID.
+        gw (int): Gameweek number.
+
+    Returns:
+        dict: JSON response containing player gameweek data.
+    """
+    url = f"https://fantasy.premierleague.com/api/element-summary/{player_id}/"
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an exception for HTTP errors
+    data = response.json()
+    return data['history']
+
 def extract_player_details(json_data):
     """
     Extract player details from the FPL JSON data.
@@ -39,8 +56,10 @@ def extract_player_details(json_data):
     rows = []
 
     for player in json_data['elements']:
-        # Extract all attributes dynamically
-        rows.append(player)
+        # Check if the player is active
+        if player["status"] != "u":
+            # Extract all attributes dynamically
+            rows.append(player)
 
     # Convert to DataFrame
     df = pd.DataFrame(rows)
@@ -60,6 +79,60 @@ def extract_player_details(json_data):
         "goals_conceded_per_90", "now_cost_rank", "now_cost_rank_type", "form_rank",
         "form_rank_type", "points_per_game_rank", "points_per_game_rank_type", "selected_rank",
         "selected_rank_type", "starts_per_90", "clean_sheets_per_90", "saves_per_90"
+    ]
+
+    for col in numeric_columns:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    return df
+
+def extract_active_players_ids(json_data):
+    """
+    Extract IDs of active players in PL
+
+    Args:
+        json_data (dict): JSON response from the FPL API.
+
+    Returns:
+        active_players_ids (list): List containing IDs of active players
+    """
+    active_players_ids = []
+
+    for player in json_data['elements']:
+        # Check if the player is active
+        if player["status"] != "u":
+            # Extract player id
+            active_players_ids.append(player["id"])
+
+    return active_players_ids
+
+def extract_player_details_by_gw(player_ids):
+    """
+    Extract player details for a specific gameweek.
+
+    Args:
+        player_ids (list): List of player IDs.
+        gw (int): Gameweek number.
+
+    Returns:
+        pd.DataFrame: DataFrame containing player details for the specified gameweek.
+    """
+    rows = []
+
+    for player_id in player_ids:
+        player_data = fetch_player_gw_data(player_id)
+        for gameweek_data in player_data:
+            rows.append(gameweek_data)
+
+    # Convert to DataFrame
+    df = pd.DataFrame(rows)
+
+    # Convert data types where applicable
+    numeric_columns = [
+        "round", "total_points", "minutes", "goals_scored", "assists", "clean_sheets",
+        "goals_conceded", "own_goals", "penalties_saved", "penalties_missed", "yellow_cards",
+        "red_cards", "saves", "bonus", "bps", "influence", "creativity", "threat", "ict_index"
     ]
 
     for col in numeric_columns:
@@ -163,6 +236,11 @@ if __name__ == "__main__":
     # Step 2: Extract player details
     players_df = extract_player_details(fpl_data)
     save_to_csv(players_df, filename="players.csv")
+    
+    # Extract player by gameweek data
+    player_ids = extract_active_players_ids(fpl_data)
+    players_gw_df = extract_player_details_by_gw(player_ids)
+    save_to_csv(players_gw_df, filename="players_gw.csv")
 
     # Step 3: Extract team details
     teams_df = extract_team_details(fpl_data)
