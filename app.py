@@ -115,22 +115,26 @@ app.layout = html.Div([
                     dcc.Dropdown(
                         id="ict-player1-dropdown",
                         options=[{"label": name, "value": name} for name in ict_index_df["web_name"].unique()],
+                        value="M.Salah",  # Default Player 1
                         placeholder="Select Player 1",
+                        style={"width": "100%"},
                     ),
-                ], style={"width": "40%", "margin": "0 10px"}),  # Style for Player 1 dropdown
+                ], style={"width": "40%", "margin-right": "10px"}),
                 html.Div([
                     dcc.Dropdown(
                         id="ict-player2-dropdown",
                         options=[{"label": name, "value": name} for name in ict_index_df["web_name"].unique()],
+                        value="Haaland",  # Default Player 2
                         placeholder="Select Player 2",
+                        style={"width": "100%"},
                     ),
-                ], style={"width": "40%", "margin": "0 10px"}),  # Style for Player 2 dropdown
+                ], style={"width": "40%"}),
             ], style={
                 "display": "flex",
                 "justify-content": "center",
-                "align-items": "center",
+                "gap": "10px",
                 "margin-bottom": "20px",
-                "gap": "20px",
+                "margin-top": "20px",
             }),
             dcc.Graph(id="ict-index-chart"),
         ]),
