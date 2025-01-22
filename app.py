@@ -28,7 +28,24 @@ app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
 # App layout
 app.layout = html.Div([
-    html.H1("FPL Analytics Dashboard", style={"textAlign": "center"}),
+    html.Div(
+        children=[
+            html.Img(
+                src="assets/pl-main-logo.png",  # Path to the logo file
+                style={"height": "80px", "margin-right": "20px"}
+            ),
+            html.H1(
+                "FPL Analytics Dashboard",
+                style={"font-family": "Roboto", "margin": "0"}
+            ),
+        ],
+        style={
+            "display": "flex",
+            "align-items": "center",
+            "justify-content": "center",
+            "margin-bottom": "20px"
+        }
+    ),
     dcc.Tabs([
         dcc.Tab(label="Player Performance by GW", children=[
             html.Div([
