@@ -1,3 +1,5 @@
+import sys
+import os
 import dash
 import math
 from dash import dcc, html, Input, Output
@@ -10,6 +12,8 @@ from utils.data_preparation import (
     prepare_ict_index_breakdown,
     prepare_fixtures_difficulty_ratings,
 )
+
+sys.path.insert(0, os.path.abspath('..'))  # Add the project root to sys.path
 
 # CSV Paths
 PLAYERS_CSV = "data/players.csv"
@@ -160,7 +164,17 @@ app.layout = html.Div([
         Input("player2-dropdown", "value"),
     ]
 )
-def update_player_performance(player1, player2):
+def update_player_performance(player1: str, player2: str) -> go.Figure: 
+    """
+    Updates the Player Performance chart for the selected players.
+
+    Args:
+        player1 (str): The name of the first selected player.
+        player2 (str): The name of the second selected player.
+
+    Returns:
+        plotly.graph_objects.Figure: A line chart comparing the players' performance across gameweeks.
+    """
     # Filter data for the two selected players
     filtered_df = player_performance_df[player_performance_df["player_name"].isin([player1, player2])]
 
@@ -190,6 +204,16 @@ def update_player_performance(player1, player2):
      Input("ict-player2-dropdown", "value")]
 )
 def update_ict_index(player1, player2):
+    """
+    Updates the ICT Index Breakdown radar chart for the selected players.
+
+    Args:
+        player1 (str): The name of the first selected player.
+        player2 (str): The name of the second selected player.
+
+    Returns:
+        plotly.graph_objects.Figure: A radar chart comparing ICT metrics for the selected players.
+    """
     categories = ["influence", "creativity", "threat", "ict_index"]
     fig = go.Figure()
 
@@ -245,6 +269,17 @@ def update_ict_index(player1, player2):
     ]
 )
 def update_player_cost_performance(selected_team, selected_position, selected_budget):
+    """
+    Updates the Player Cost vs. Performance scatter plot based on selected filters.
+
+    Args:
+        selected_team (str): The selected team name.
+        selected_position (str): The selected player position.
+        selected_budget (float): The selected budget limit.
+
+    Returns:
+        plotly.graph_objects.Figure: A scatter plot showing player cost vs. performance.
+    """
     # Start with the full dataset
     filtered_df = player_cost_performance_df
 
@@ -275,6 +310,15 @@ def update_player_cost_performance(selected_team, selected_position, selected_bu
     Input("fixtures-difficulty-chart", "id")  # Placeholder input to trigger rendering
 )
 def update_fixtures_difficulty(_):
+    """
+    Updates the Fixtures Difficulty Rating heatmap.
+
+    Args:
+        _ (str): Placeholder argument for triggering the callback.
+
+    Returns:
+        plotly.graph_objects.Figure: A heatmap showing fixture difficulty ratings by gameweek.
+    """
     custom_colorscale = [
         [0, "#00DFA2"],  # Start color
         [1, "#FF0060"]   # End color
