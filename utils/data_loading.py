@@ -30,6 +30,9 @@ def fetch_data(url: str) -> Dict:
     except requests.RequestException as e:
         logging.error(f"Error fetching data from {url}: {e}")
         raise
+    except ValueError as ve:
+        logging.error(f"Invalid data from {url}: {ve}")
+        raise
 
 def fetch_fpl_data() -> Dict:
     """Fetch general FPL data."""
@@ -55,34 +58,50 @@ def fetch_player_gw_data(player_id: int) -> List[Dict]:
 
 def extract_player_details(json_data: Dict) -> pd.DataFrame:
     """Extract player details."""
-    players = [player for player in json_data['elements'] if player['status'] != 'u']
-    df = pd.DataFrame(players)
+    try:
+        elements = json_data.get("elements", [])
+        if not elements:
+            raise ValueError("No 'elements' key found in the data.")
+    
+        players = [player for player in json_data['elements'] if player['status'] != 'u']
+        df = pd.DataFrame(players)
 
-    numeric_columns = ["now_cost", "total_points", "minutes", "goals_scored", "assists"]
-    for col in numeric_columns:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
+        numeric_columns = ["now_cost", "total_points", "minutes", "goals_scored", "assists"]
+        for col in numeric_columns:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')
 
-    return df
+        return df
+    except Exception as e:
+        logging.error(f"Error extracting player details: {e}")
+        raise
 
 def extract_active_player_ids(json_data: Dict) -> List[int]:
     """Extract IDs of active players."""
-    return [player['id'] for player in json_data['elements'] if player['status'] != 'u']
+    try:
+        return [player['id'] for player in json_data['elements'] if player['status'] != 'u']
+    except Exception as e:
+        logging.error(f"Error extracting active player IDs: {e}")
+        raise
 
 def extract_player_details_by_gw(player_ids: List[int]) -> pd.DataFrame:
     """Extract player gameweek details."""
-    rows = []
-    for player_id in player_ids:
-        gw_data = fetch_player_gw_data(player_id)
-        rows.extend(gw_data)
+    try:
+        rows = []
+        for player_id in player_ids:
+            gw_data = fetch_player_gw_data(player_id)
+            rows.extend(gw_data)
 
-    df = pd.DataFrame(rows)
-    numeric_columns = ["total_points", "minutes", "goals_scored", "assists"]
-    for col in numeric_columns:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
+        df = pd.DataFrame(rows)
+        numeric_columns = ["total_points", "minutes", "goals_scored", "assists"]
+        for col in numeric_columns:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')
 
-    return df
+        return df
+    except Exception as e:
+        logging.error(f"Error extracting player by details by gameweek: {e}")
+        raise
 
 def extract_team_details(json_data: Dict) -> pd.DataFrame:
     """Extract team details."""
@@ -111,10 +130,14 @@ def save_to_csv(df: pd.DataFrame, output_folder: str, filename: str):
         output_folder (str): Directory to save the CSV file.
         filename (str): Name of the CSV file.
     """
-    os.makedirs(output_folder, exist_ok=True)
-    file_path = os.path.join(output_folder, filename)
-    df.to_csv(file_path, index=False)
-    logging.info(f"Data saved to {file_path}")
+    try:
+        os.makedirs(output_folder, exist_ok=True)
+        file_path = os.path.join(output_folder, filename)
+        df.to_csv(file_path, index=False)
+        logging.info(f"Data saved to {file_path}")
+    except OSError as e:
+        logging.error(f"Failed to save {filename}: {e}")
+        raise
 
 if __name__ == "__main__":
     OUTPUT_DIR = "data"

@@ -201,7 +201,7 @@ def fixtures_difficulty_callback(_):
 if __name__ == "__main__":
     # Load processed data
     player_performance_df = prepare_player_performance_by_gw(PLAYERS_GW_CSV, PLAYERS_CSV)
-    player_cost_performance_df = prepare_player_cost_vs_performance(PLAYERS_CSV)
+    player_cost_performance_df = prepare_player_cost_vs_performance(PLAYERS_CSV, TEAMS_CSV)
     ict_index_df = prepare_ict_index_breakdown(PLAYERS_CSV)
     fixtures_difficulty_df = prepare_fixtures_difficulty_ratings(FIXTURES_CSV, TEAMS_CSV)
 
