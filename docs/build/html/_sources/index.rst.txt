@@ -27,4 +27,3 @@ Contents
    :caption: Contents:
 
    modules
-   app

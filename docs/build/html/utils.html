@@ -208,6 +208,87 @@
 </dd></dl>
 
 </section>
+<section id="utils-data-visualization-module">
+<h2>utils.data_visualization module<a class="headerlink" href="#utils-data-visualization-module" title="Link to this heading">¶</a></h2>
+<dl class="py function" id="module-utils.data_visualization">
+<dt class="sig sig-object py" id="utils.data_visualization.update_fixtures_difficulty">
+<span class="sig-prename descclassname"><span class="pre">utils.data_visualization.</span></span><span class="sig-name descname"><span class="pre">update_fixtures_difficulty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fixtures_difficulty_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#utils.data_visualization.update_fixtures_difficulty" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the Fixtures Difficulty Rating heatmap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_</strong> (<em>str</em>) – Placeholder argument for triggering the callback.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A heatmap showing fixture difficulty ratings by gameweek.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.data_visualization.update_ict_index">
+<span class="sig-prename descclassname"><span class="pre">utils.data_visualization.</span></span><span class="sig-name descname"><span class="pre">update_ict_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ict_index_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#utils.data_visualization.update_ict_index" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the ICT Index Breakdown radar chart for the selected players.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player1</strong> (<em>str</em>) – The name of the first selected player.</p></li>
+<li><p><strong>player2</strong> (<em>str</em>) – The name of the second selected player.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A radar chart comparing ICT metrics for the selected players.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.data_visualization.update_player_cost_performance">
+<span class="sig-prename descclassname"><span class="pre">utils.data_visualization.</span></span><span class="sig-name descname"><span class="pre">update_player_cost_performance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected_team</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_budget</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_cost_performance_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">scatter</span></span></span><a class="headerlink" href="#utils.data_visualization.update_player_cost_performance" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the Player Cost vs. Performance scatter plot based on selected filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>selected_team</strong> (<em>str</em>) – The selected team name.</p></li>
+<li><p><strong>selected_position</strong> (<em>str</em>) – The selected player position.</p></li>
+<li><p><strong>selected_budget</strong> (<em>float</em>) – The selected budget limit.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A scatter plot showing player cost vs. performance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.data_visualization.update_player_performance">
+<span class="sig-prename descclassname"><span class="pre">utils.data_visualization.</span></span><span class="sig-name descname"><span class="pre">update_player_performance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_performance_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#utils.data_visualization.update_player_performance" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the Player Performance chart for the selected players.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player1</strong> (<em>str</em>) – The name of the first selected player.</p></li>
+<li><p><strong>player2</strong> (<em>str</em>) – The name of the second selected player.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A line chart comparing the players’ performance across gameweeks.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-utils">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utils" title="Link to this heading">¶</a></h2>
 </section>

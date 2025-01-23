@@ -20,6 +20,14 @@ utils.data\_preparation module
    :undoc-members:
    :show-inheritance:
 
+utils.data\_visualization module
+------------------------------
+
+.. automodule:: utils.data_visualization
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
