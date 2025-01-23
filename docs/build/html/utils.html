@@ -42,31 +42,98 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.data_loading.extract_active_player_ids">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">extract_active_player_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utils.data_loading.extract_active_player_ids" title="Link to this definition">¶</a></dt>
-<dd><p>Extract IDs of active players.</p>
+<dd><p>Extract IDs of active players from FPL JSON data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_data</strong> (<em>dict</em>) – JSON data containing player details.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of active player IDs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If there is an issue extracting player IDs.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.data_loading.extract_fixture_details">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">extract_fixture_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#utils.data_loading.extract_fixture_details" title="Link to this definition">¶</a></dt>
-<dd><p>Extract fixture details.</p>
+<dd><p>Extract fixture details from FPL JSON data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_data</strong> (<em>list</em>) – JSON data containing fixture details.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame containing fixture details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.data_loading.extract_player_details">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">extract_player_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#utils.data_loading.extract_player_details" title="Link to this definition">¶</a></dt>
-<dd><p>Extract player details.</p>
+<dd><p>Extract player details from FPL JSON data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_data</strong> (<em>dict</em>) – JSON data containing player details.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame containing player details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the JSON data does not contain the ‘elements’ key or if it is empty.</p></li>
+<li><p><strong>Exception</strong> – For other errors during data extraction.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.data_loading.extract_player_details_by_gw">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">extract_player_details_by_gw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#utils.data_loading.extract_player_details_by_gw" title="Link to this definition">¶</a></dt>
-<dd><p>Extract player gameweek details.</p>
+<dd><p>Extract player gameweek details from the FPL API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>player_ids</strong> (<em>list</em>) – List of player IDs.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame containing gameweek details for players.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If there is an issue extracting gameweek details.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.data_loading.extract_team_details">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">extract_team_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#utils.data_loading.extract_team_details" title="Link to this definition">¶</a></dt>
-<dd><p>Extract team details.</p>
+<dd><p>Extract team details from FPL JSON data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_data</strong> (<em>dict</em>) – JSON data containing team details.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame containing team details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -78,10 +145,16 @@
 <dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – API endpoint URL.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>JSON response.</p>
+<dd class="field-even"><p>JSON response from the API.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>requests.RequestException</strong> – If there is an issue with the HTTP request.</p></li>
+<li><p><strong>ValueError</strong> – If the response data is invalid or cannot be parsed.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -90,12 +163,40 @@
 <dt class="sig sig-object py" id="utils.data_loading.fetch_fixtures_data">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">fetch_fixtures_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utils.data_loading.fetch_fixtures_data" title="Link to this definition">¶</a></dt>
 <dd><p>Fetch fixtures data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response containing fixture data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>requests.RequestException</strong> – If there is an issue with the HTTP request.</p></li>
+<li><p><strong>ValueError</strong> – If the response data is invalid or cannot be parsed.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.data_loading.fetch_fpl_data">
 <span class="sig-prename descclassname"><span class="pre">utils.data_loading.</span></span><span class="sig-name descname"><span class="pre">fetch_fpl_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#utils.data_loading.fetch_fpl_data" title="Link to this definition">¶</a></dt>
-<dd><p>Fetch general FPL data.</p>
+<dd><p>Fetch general Fantasy Premier League (FPL) data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response containing general FPL data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>requests.RequestException</strong> – If there is an issue with the HTTP request.</p></li>
+<li><p><strong>ValueError</strong> – If the response data is invalid or cannot be parsed.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -112,6 +213,12 @@
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>requests.RequestException</strong> – If there is an issue with the HTTP request.</p></li>
+<li><p><strong>ValueError</strong> – If the response data is invalid or cannot be parsed.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -126,6 +233,9 @@
 <li><p><strong>output_folder</strong> (<em>str</em>) – Directory to save the CSV file.</p></li>
 <li><p><strong>filename</strong> (<em>str</em>) – Name of the CSV file.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>OSError</strong> – If there is an error creating the output folder or saving the file.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -150,6 +260,12 @@
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If input files do not exist.</p></li>
+<li><p><strong>ValueError</strong> – If required columns are missing.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -167,6 +283,12 @@
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If the input file does not exist.</p></li>
+<li><p><strong>ValueError</strong> – If required columns are missing.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -176,13 +298,22 @@
 <dd><p>Prepare data for Player Cost vs. Performance visualization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>players_path</strong> (<em>str</em>) – Path to the players CSV file.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players_path</strong> (<em>str</em>) – Path to the players CSV file.</p></li>
+<li><p><strong>teams_path</strong> (<em>str</em>) – Path to the teams CSV file.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Processed DataFrame ready for visualization.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If input files do not exist.</p></li>
+<li><p><strong>ValueError</strong> – If required columns are missing.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -204,6 +335,12 @@
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If input files do not exist.</p></li>
+<li><p><strong>ValueError</strong> – If required columns are missing.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -216,7 +353,7 @@
 <dd><p>Updates the Fixtures Difficulty Rating heatmap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_</strong> (<em>str</em>) – Placeholder argument for triggering the callback.</p>
+<dd class="field-odd"><p><strong>fixtures_difficulty_df</strong> (<em>pd.DataFrame</em>) – DataFrame containing fixture difficulty data.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A heatmap showing fixture difficulty ratings by gameweek.</p>
@@ -236,6 +373,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>player1</strong> (<em>str</em>) – The name of the first selected player.</p></li>
 <li><p><strong>player2</strong> (<em>str</em>) – The name of the second selected player.</p></li>
+<li><p><strong>ict_index_df</strong> (<em>pd.DataFrame</em>) – DataFrame containing ICT index data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -257,6 +395,7 @@
 <li><p><strong>selected_team</strong> (<em>str</em>) – The selected team name.</p></li>
 <li><p><strong>selected_position</strong> (<em>str</em>) – The selected player position.</p></li>
 <li><p><strong>selected_budget</strong> (<em>float</em>) – The selected budget limit.</p></li>
+<li><p><strong>player_cost_performance_df</strong> (<em>pd.DataFrame</em>) – DataFrame containing player cost and performance data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -277,6 +416,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>player1</strong> (<em>str</em>) – The name of the first selected player.</p></li>
 <li><p><strong>player2</strong> (<em>str</em>) – The name of the second selected player.</p></li>
+<li><p><strong>player_performance_df</strong> (<em>pd.DataFrame</em>) – DataFrame containing player performance data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

@@ -21,7 +21,11 @@ def fetch_data(url: str) -> Dict:
         url (str): API endpoint URL.
 
     Returns:
-        dict: JSON response.
+        dict: JSON response from the API.
+
+    Raises:
+        requests.RequestException: If there is an issue with the HTTP request.
+        ValueError: If the response data is invalid or cannot be parsed.
     """
     try:
         response = requests.get(url)
@@ -35,11 +39,29 @@ def fetch_data(url: str) -> Dict:
         raise
 
 def fetch_fpl_data() -> Dict:
-    """Fetch general FPL data."""
+    """
+    Fetch general Fantasy Premier League (FPL) data.
+
+    Returns:
+        dict: JSON response containing general FPL data.
+
+    Raises:
+        requests.RequestException: If there is an issue with the HTTP request.
+        ValueError: If the response data is invalid or cannot be parsed.
+    """
     return fetch_data(FPL_BOOTSTRAP_STATIC)
 
 def fetch_fixtures_data() -> List[Dict]:
-    """Fetch fixtures data."""
+    """
+    Fetch fixtures data.
+
+    Returns:
+        list: JSON response containing fixture data.
+
+    Raises:
+        requests.RequestException: If there is an issue with the HTTP request.
+        ValueError: If the response data is invalid or cannot be parsed.
+    """
     return fetch_data(FPL_FIXTURES)
 
 def fetch_player_gw_data(player_id: int) -> List[Dict]:
@@ -51,13 +73,29 @@ def fetch_player_gw_data(player_id: int) -> List[Dict]:
 
     Returns:
         list: List of gameweek data for the player.
+
+    Raises:
+        requests.RequestException: If there is an issue with the HTTP request.
+        ValueError: If the response data is invalid or cannot be parsed.
     """
     url = FPL_PLAYER_SUMMARY.format(player_id=player_id)
     data = fetch_data(url)
     return data.get('history', [])
 
 def extract_player_details(json_data: Dict) -> pd.DataFrame:
-    """Extract player details."""
+    """
+    Extract player details from FPL JSON data.
+
+    Args:
+        json_data (dict): JSON data containing player details.
+
+    Returns:
+        pd.DataFrame: DataFrame containing player details.
+
+    Raises:
+        ValueError: If the JSON data does not contain the 'elements' key or if it is empty.
+        Exception: For other errors during data extraction.
+    """
     try:
         elements = json_data.get("elements", [])
         if not elements:
@@ -77,7 +115,18 @@ def extract_player_details(json_data: Dict) -> pd.DataFrame:
         raise
 
 def extract_active_player_ids(json_data: Dict) -> List[int]:
-    """Extract IDs of active players."""
+    """
+    Extract IDs of active players from FPL JSON data.
+
+    Args:
+        json_data (dict): JSON data containing player details.
+
+    Returns:
+        list: List of active player IDs.
+
+    Raises:
+        Exception: If there is an issue extracting player IDs.
+    """
     try:
         return [player['id'] for player in json_data['elements'] if player['status'] != 'u']
     except Exception as e:
@@ -85,7 +134,18 @@ def extract_active_player_ids(json_data: Dict) -> List[int]:
         raise
 
 def extract_player_details_by_gw(player_ids: List[int]) -> pd.DataFrame:
-    """Extract player gameweek details."""
+    """
+    Extract player gameweek details from the FPL API.
+
+    Args:
+        player_ids (list): List of player IDs.
+
+    Returns:
+        pd.DataFrame: DataFrame containing gameweek details for players.
+
+    Raises:
+        Exception: If there is an issue extracting gameweek details.
+    """
     try:
         rows = []
         for player_id in player_ids:
@@ -100,11 +160,19 @@ def extract_player_details_by_gw(player_ids: List[int]) -> pd.DataFrame:
 
         return df
     except Exception as e:
-        logging.error(f"Error extracting player by details by gameweek: {e}")
+        logging.error(f"Error extracting player details by gameweek: {e}")
         raise
 
 def extract_team_details(json_data: Dict) -> pd.DataFrame:
-    """Extract team details."""
+    """
+    Extract team details from FPL JSON data.
+
+    Args:
+        json_data (dict): JSON data containing team details.
+
+    Returns:
+        pd.DataFrame: DataFrame containing team details.
+    """
     df = pd.DataFrame(json_data['teams'])
     numeric_columns = ["strength", "strength_attack_home", "strength_defence_away"]
     for col in numeric_columns:
@@ -113,7 +181,15 @@ def extract_team_details(json_data: Dict) -> pd.DataFrame:
     return df
 
 def extract_fixture_details(json_data: List[Dict]) -> pd.DataFrame:
-    """Extract fixture details."""
+    """
+    Extract fixture details from FPL JSON data.
+
+    Args:
+        json_data (list): JSON data containing fixture details.
+
+    Returns:
+        pd.DataFrame: DataFrame containing fixture details.
+    """
     df = pd.DataFrame(json_data)
     selected_columns = [
         "code", "event", "finished", "kickoff_time", "team_a", "team_a_score", "team_h", "team_h_score", "team_h_difficulty", "team_a_difficulty"
@@ -129,6 +205,9 @@ def save_to_csv(df: pd.DataFrame, output_folder: str, filename: str):
         df (pd.DataFrame): DataFrame to save.
         output_folder (str): Directory to save the CSV file.
         filename (str): Name of the CSV file.
+
+    Raises:
+        OSError: If there is an error creating the output folder or saving the file.
     """
     try:
         os.makedirs(output_folder, exist_ok=True)
