@@ -43,7 +43,7 @@ poetry install
 poetry run python app.py
 ```
 
-4. **Access the Dashboard** Open your browser and navigate to: [http://127.0.0.1:8050](http://127.0.0.1:8050)
+4. **Access the Dashboard** Open your browser and navigate to: [http://0.0.0.0:8050/](http://0.0.0.0:8050/)
 
 ### Using Docker
 
