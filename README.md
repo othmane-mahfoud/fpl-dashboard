@@ -84,6 +84,22 @@ poetry run sphinx-build docs/ docs/_build
 
 2. **View Documentation** Open the generated HTML in your browser: `docs/_build/index.html`
 
+## Results
+
+Below are some screenshots from the running app.
+
+### Player Performance Comparison by Gameweek
+![](assets/screenshots/player_performance_by_gw.png)
+
+### Player Cost vs. Performance
+![](assets/screenshots/cost_performance.png)
+
+### ICT Index Breakdown
+![](assets/screenshots/ict_index.png)
+
+### Fixtures Difficulty Rating
+![](assets/screenshots/fdr.png)
+
 ## Author
 
 Othmane Mahfoud <br>
