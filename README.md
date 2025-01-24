@@ -29,7 +29,7 @@ The app is built using **Dash**, with a backend implemented in **Python**, and d
 
 1. **Clone the Repository**
 ```bash
-git clone https://github.com/your-username/fpl-dashboard.git
+git clone https://github.com/othmane-mahfoud/fpl-dashboard.git
 cd fpl-dashboard
 ```
 
