@@ -6,7 +6,7 @@ authors = [
     {name = "Othmane Mahfoud",email = "mahfoud.othmane97@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "pandas (>=2.2.3,<3.0.0)",
     "dash (>=2.18.2,<3.0.0)",
@@ -25,3 +25,4 @@ build-backend = "poetry.core.masonry.api"
 pytest = "^8.3.4"
 sphinx = "^8.1.3"
 
+ 
