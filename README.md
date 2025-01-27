@@ -21,7 +21,7 @@ The app is built using **Dash**, with a backend implemented in **Python**, and d
 
 ### Prerequisites
 
-- Python ≥ 3.13
+- Python ≥ 3.10
 - Poetry ≥ 1.6
 - Docker ≥ 20.10.0
 
