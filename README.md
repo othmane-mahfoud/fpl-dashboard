@@ -5,7 +5,6 @@
 The **Fantasy Premier League (FPL) Dashboard** is a web-based analytics application that provides insightful visualizations for Fantasy Premier League players and teams. It allows users to analyze player performances, compare statistics, and evaluate fixture difficulty.
 
 The app is built using **Dash**, with a backend implemented in **Python**, and dependencies managed using **Poetry**. The project is containerized using **Docker** for consistent deployment.
-
 ---
 
 ## Features
@@ -87,10 +86,23 @@ Project documentation is generated using **Sphinx** and can be found in the `doc
 
 1. **Build Documentation**
 ```bash
-poetry run sphinx-build docs/ docs/_build
+poetry run sphinx-apidoc -o docs/source .
+```
+
+2. **Change directories** and move to the `/docs` folder
+```bash
+cd docs
+```
+
+3. **Generate the documentation** in HTML 
+```bash
+poetry run make html
 ```
 
 2. **View Documentation** Open the generated HTML in your browser: `docs/_build/index.html`
+```bash
+open build/html/index.html
+```
 
 ## Results
 
