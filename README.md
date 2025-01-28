@@ -66,8 +66,15 @@ When using Safari or some other browsers, ensure you access the app via `http://
 Before running the script with Poetry you need to ensure a proper installation of Poetry on your achine
 
 1. **Download and Install Poetry** 
+
+- On Linux, macOS, Windows (WSL): <br>
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
+```
+
+- On Windows (Powershell): <br>
+```bash
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
 ```
 
 2. **Verify the installation**
