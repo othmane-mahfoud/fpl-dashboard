@@ -206,4 +206,4 @@ if __name__ == "__main__":
     fixtures_difficulty_df = prepare_fixtures_difficulty_ratings(FIXTURES_CSV, TEAMS_CSV)
 
     # Run the Dash app
-    app.run_server(debug=True, host="0.0.0.0", port=8050)
+    app.run_server(debug=False, host="0.0.0.0", port=8050)
