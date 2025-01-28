@@ -21,7 +21,7 @@ utils.data\_preparation module
    :show-inheritance:
 
 utils.data\_visualization module
-------------------------------
+--------------------------------
 
 .. automodule:: utils.data_visualization
    :members:
